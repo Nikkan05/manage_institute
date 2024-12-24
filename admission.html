@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Admission Page</title>
+    <style>
+        /* Colors */
+        :root {
+            --light-green: #D8F3DC;
+            --medium-green: #B7E4C7;
+            --dark-green: #95D5B2;
+            --darkest-green: #081C15;
+            --white: #ffffff;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-green);
+            color: var(--darkest-green);
+        }
+
+        header {
+            background-color: var(--medium-green);
+            color: var(--darkest-green);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h2 {
+            color: var(--dark-green);
+        }
+
+        button {
+            background: var(--dark-green);
+            color: var(--white);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background: var(--medium-green);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--medium-green);
+            border-radius: 5px;
+            background-color: var(--light-green);
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--dark-green);
+            box-shadow: 0 0 5px var(--dark-green);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+            color: var(--darkest-green);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hide/Show Sections */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admission Page</h1>
+    </header>
+    <div class="container">
+        <!-- Course List -->
+        <div class="course-list" id="courseListSection">
+            <h2>Choose a Course</h2>
+            <select id="courseSelect" onchange="showCourseDetails()">
+                <option value="" disabled selected>Select a course</option>
+                <option value="CS101">Computer Science</option>
+                <option value="ECE102">Electronics and Communication</option>
+                <option value="MECH103">Mechanical Engineering</option>
+                <option value="CIVIL104">Civil Engineering</option>
+            </select>
+        </div>
+
+        <!-- Course Details -->
+        <div class="course-details hidden" id="courseDetailsSection">
+            <h2>Course Details</h2>
+            <p id="courseDetails"></p>
+            <button onclick="askForAdmission(true)">Interested in Admission</button>
+            <button onclick="goBackToList()">Go Back</button>
+        </div>
+
+        <!-- Admission Form -->
+        <div class="admission-form hidden" id="admissionFormSection">
+            <h2>Admission Form</h2>
+            <form id="admissionForm" onsubmit="submitForm(event)">
+                <label for="studentName">Full Name:</label>
+                <input type="text" id="studentName" placeholder="Enter your name" required>
+
+                <label for="studentEmail">Email Address:</label>
+                <input type="email" id="studentEmail" placeholder="Enter your email" required>
+
+                <label for="studentPhone">Phone Number:</label>
+                <input type="text" id="studentPhone" placeholder="Enter your phone number" required>
+
+                <label for="studentAddress">Address:</label>
+                <input type="text" id="studentAddress" placeholder="Enter your address" required>
+
+                <button type="submit">Submit Admission Form</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Course details
+        const courseInfo = {
+            CS101: {
+                name: "Computer Science",
+                startDate: "1st August 2024",
+                endDate: "30th May 2028",
+                duration: "4 years",
+                highlights: "Programming, AI, Machine Learning, Data Science"
+            },
+            ECE102: {
+                name: "Electronics and Communication",
+                startDate: "1st August 2024",
+                endDate: "30th May 2028",
+                duration: "4 years",
+                highlights: "VLSI Design, Communication Systems, IoT"
+            },
+            MECH103: {
+                name: "Mechanical Engineering",
+                startDate: "1st August 2024",
+                endDate: "30th May 2028",
+                duration: "4 years",
+                highlights: "Thermodynamics, CAD, Robotics"
+            },
+            CIVIL104: {
+                name: "Civil Engineering",
+                startDate: "1st August 2024",
+                endDate: "30th May 2028",
+                duration: "4 years",
+                highlights: "Structural Design, Surveying, Urban Planning"
+            }
+        };
+
+        // Show course details
+        function showCourseDetails() {
+            const courseId = document.getElementById("courseSelect").value;
+            const course = courseInfo[courseId];
+            const courseDetailsSection = document.getElementById("courseDetailsSection");
+            const courseDetails = document.getElementById("courseDetails");
+
+            if (course) {
+                courseDetails.innerHTML = `
+                    <strong>Course Name:</strong> ${course.name}<br>
+                    <strong>Start Date:</strong> ${course.startDate}<br>
+                    <strong>End Date:</strong> ${course.endDate}<br>
+                    <strong>Duration:</strong> ${course.duration}<br>
+                    <strong>Highlights:</strong> ${course.highlights}
+                `;
+                courseDetailsSection.classList.remove("hidden");
+            }
+        }
+
+        // Show admission form
+        function askForAdmission(isInterested) {
+            if (isInterested) {
+                document.getElementById("courseListSection").classList.add("hidden");
+                document.getElementById("courseDetailsSection").classList.add("hidden");
+                document.getElementById("admissionFormSection").classList.remove("hidden");
+            }
+        }
+
+        // Go back to course list
+        function goBackToList() {
+            document.getElementById("courseListSection").classList.remove("hidden");
+            document.getElementById("courseDetailsSection").classList.add("hidden");
+            document.getElementById("admissionFormSection").classList.add("hidden");
+        }
+
+        // Submit form and redirect to home
+        function submitForm(event) {
+            event.preventDefault();
+            alert("Your admission form has been submitted!");
+            window.location.href = "index.html"; // Replace "index.html" with the actual home page URL
+        }
+    </script>
+</body>
+</html>

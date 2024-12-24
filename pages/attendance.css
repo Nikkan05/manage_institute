@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #D8F3DC; /* Light green background */
+  color: #1B4332; /* Dark text color */
+}
+
+header {
+  background-color: #2D6A4F; /* Deep green */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 30px;
+  background-color: #95D5B2; /* Medium green */
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  color: #2D6A4F; /* Dark green for section titles */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white; /* Table background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  color: #1B4332; /* Text inside table */
+}
+
+table th {
+  background-color: #74C69D; /* Light green for headers */
+  color: white; /* White text in headers */
+}
+
+button {
+  background-color: #2D6A4F; /* Deep green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #1B4332; /* Dark green on hover */
+}
+
+button:active {
+  background-color: #081C15; /* Darkest shade for click effect */
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #2D6A4F; /* Deep green */
+  color: white;
+  margin-top: 30px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+}

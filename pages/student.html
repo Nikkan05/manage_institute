@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="subpages/coursedetails.html" id="courseLink">Course</a>
+        <a href="subpages/semester.html" id="semesterLink">Semester</a>
+        <a href="subpages/feestatus.html" id="feesLink">Fees Status</a>
+        <a href="subpages/uploaded.html" id="documentsLink">Uploaded Documents</a>
+        <a href="subpages/mar.html" id="documentsLink">Mar points</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Timetable -->
+        <div class="timetable-section">
+            <h2>Timetable</h2>
+            <table id="timetable">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>9:00 - 10:00</th>
+                        <th>10:15 - 11:15</th>
+                        <th>11:30 - 12:30</th>
+                        <th>1:30 - 2:30</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>Math</td>
+                        <td>Physics</td>
+                        <td>Electronics</td>
+                        <td>Lab</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>Programming</td>
+                        <td>Math</td>
+                        <td>Physics</td>
+                        <td>Seminar</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>Electronics</td>
+                        <td>Programming</td>
+                        <td>Math</td>
+                        <td>Lab</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Important Notices -->
+        <div class="notices-section">
+            <h2>Important Notices</h2>
+            <ul id="notices">
+                <li>Midterm exams start on 10th January.</li>
+                <li>Submit project proposals by 5th January.</li>
+                <li>Library books due for return by 15th January.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="student.js"></script>
+</body>
+</html>

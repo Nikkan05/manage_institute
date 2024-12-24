@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* Colors */
+        :root {
+            --light-green: #D8F3DC;
+            --medium-green: #B7E4C7;
+            --dark-green: #95D5B2;
+            --darkest-green: #081C15;
+            --white: #ffffff;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-green);
+            color: var(--darkest-green);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 5% auto;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--dark-green);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        a {
+            display: inline-block;
+            margin: 1rem 0;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+            color: var(--white);
+            background-color: var(--dark-green);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: var(--medium-green);
+            transform: translateY(-2px);
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>If you have any questions, feel free to reach out to us:</p>
+        <a href="tel:+1234567890">📞 Call Us: +123-456-7890</a><br>
+        <a href="mailto:contact@yourdomain.com">📧 Email Us: contact@yourdomain.com</a>
+    </div>
+    <footer>
+        <p>© 2024 Your Company Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>

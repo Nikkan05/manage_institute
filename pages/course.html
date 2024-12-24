@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9; /* Light neutral background */
+            color: #1B4332; /* Darker text for readability */
+        }
+    
+        header {
+            background-color: #95D5B2; /* Vibrant header color */
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #40916C; /* Slightly darker navbar */
+            padding: 0.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+    
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            position: relative;
+        }
+    
+        nav a:hover::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: white;
+            width: 100%;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+    
+        .container {
+            padding: 2rem;
+        }
+    
+        .form-section, .view-section {
+            background: white;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .form-section:hover, .view-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        label {
+            display: block;
+            margin: 0.8rem 0 0.3rem;
+            font-weight: bold;
+        }
+    
+        input[type="text"], input[type="file"], input[type="search"] {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        input[type="text"]:focus, input[type="file"]:focus, input[type="search"]:focus {
+            border-color: #6200ea;
+            box-shadow: 0 0 5px rgba(98, 0, 234, 0.5);
+            outline: none;
+        }
+    
+        button {
+            background: #95D5B2;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        button:hover {
+            background: #3700b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+    
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .course {
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #e0e0e0;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .course:hover {
+            background: #d6d6d6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Course Management System</h1>
+    </header>
+    <nav>
+        <a href="#upload">Upload Curriculum</a>
+        <a href="#view">View Curriculums</a>
+    </nav>
+
+    <div class="container" id="upload">
+        <div class="form-section">
+            <h2>Upload Course Curriculum</h2>
+            <form id="uploadForm">
+                <label for="courseName">Course Name:</label>
+                <input type="text" id="courseName" name="courseName" required>
+
+                <label for="curriculumFile">Upload Curriculum:</label>
+                <input type="file" id="curriculumFile" name="curriculumFile" accept=".pdf,.doc,.docx" required>
+
+                <button type="button" onclick="uploadCurriculum()">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="view">
+        <div class="view-section">
+            <h2>Available Curriculums</h2>
+            <input type="search" id="searchBar" placeholder="Search for a course..." oninput="filterCourses()">
+            <div id="courseList">
+                <!-- Dynamically populated course list -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder for backend storage
+        const courses = [];
+
+        function uploadCurriculum() {
+            const courseName = document.getElementById('courseName').value;
+            const curriculumFile = document.getElementById('curriculumFile').files[0];
+
+            if (!courseName || !curriculumFile) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            const confirmation = confirm(`Are you sure you want to upload the curriculum for "${courseName}"?`);
+            if (!confirmation) return;
+
+            const course = {
+                name: courseName,
+                fileName: curriculumFile.name,
+                fileURL: URL.createObjectURL(curriculumFile),
+            };
+
+            courses.push(course);
+            alert('Curriculum uploaded successfully!');
+            document.getElementById('uploadForm').reset();
+            displayCourses();
+        }
+
+        function displayCourses() {
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = '';
+
+            if (courses.length === 0) {
+                courseList.innerHTML = '<p>No curriculums available.</p>';
+                return;
+            }
+
+            courses.forEach((course, index) => {
+                const courseDiv = document.createElement('div');
+                courseDiv.className = 'course';
+
+                courseDiv.innerHTML = `
+                    <h3>${course.name}</h3>
+                    <p><a href="${course.fileURL}" target="_blank">Download Curriculum</a></p>
+                    <button onclick="deleteCourse(${index})">Delete</button>
+                `;
+
+                courseList.appendChild(courseDiv);
+            });
+        }
+
+        function deleteCourse(index) {
+            const confirmation = confirm(`Are you sure you want to delete the course "${courses[index].name}"?`);
+            if (confirmation) {
+                courses.splice(index, 1);
+                displayCourses();
+            }
+        }
+
+        function filterCourses() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = '';
+
+            const filteredCourses = courses.filter(course => course.name.toLowerCase().includes(query));
+
+            if (filteredCourses.length === 0) {
+                courseList.innerHTML = '<p>No matching curriculums found.</p>';
+                return;
+            }
+
+            filteredCourses.forEach((course, index) => {
+                const courseDiv = document.createElement('div');
+                courseDiv.className = 'course';
+
+                courseDiv.innerHTML = `
+                    <h3>${course.name}</h3>
+                    <p><a href="${course.fileURL}" target="_blank">Download Curriculum</a></p>
+                `;
+
+                courseList.appendChild(courseDiv);
+            });
+        }
+
+        // Initial display
+        displayCourses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Attendance Page</title>
+  <link rel="stylesheet" href="attendance.css">
+</head>
+<body>
+  <header>
+    <h1>Attendance Management</h1>
+  </header>
+  
+  <main>
+    <section>
+      <h2>Mark Attendance</h2>
+      <form id="attendanceForm">
+        <table>
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Student Name</th>
+              <th>Present</th>
+            </tr>
+          </thead>
+          <tbody id="studentList">
+            <!-- Dynamic student rows will be injected -->
+          </tbody>
+        </table>
+        <button type="submit">Submit Attendance</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Previous Logs</h2>
+      <button id="viewLogsButton">View Attendance Logs</button>
+      <div id="attendanceLogs">
+        <!-- Logs will be dynamically loaded -->
+      </div>
+    </section>
+  </main>
+
+  <script src="attendance.js"></script>
+</body>
+</html>
